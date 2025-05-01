@@ -5,7 +5,7 @@
 set -e
 PACKAGE_NAME="YoutubeMojiCopy"
 # manifest.json から version を取得
-VERSION=$(grep -E '"version"\s*:' manifest.json | sed -E 's/.*"([0-9]+\.[0-9]+(?:\.[0-9]+)?)".*/\1/')
+VERSION=$(grep -E '"version"\s*:' manifest.json | sed -E 's/.*"([0-9]+\.[0-9]+(\.[0-9]+)?)".*/\1/')
 OUTFILE="${PACKAGE_NAME}_v${VERSION}.zip"
 
 echo "Packaging ${PACKAGE_NAME} version ${VERSION} into ${OUTFILE}..."
