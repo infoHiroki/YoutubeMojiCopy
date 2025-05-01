@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube Transcript Copier</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="noise"></div>
+    <div class="scanline"></div>
+    <div class="container">
+        <h1 class="title">TRANSCRIPT COPIER</h1>
+
+<select id="templateSelect">
+    <option value="">P R O M P T</option>
+    <option disabled>------- E n g l i s h -------</option>
+    <option value="Please summarize the following YouTube video transcript. Create a list of 3-5 key points and provide a 200-word summary.">B a s i c</option>
+    <option value="Please analyze the content with 5 key points, including specific examples for each. End with a 300-word comprehensive summary.">D e t a i l e d</option>
+    <option value="For the following content:
+1. Main arguments (3 points)
+2. Examples for each argument
+3. Counter-arguments
+4. Conclusion">D e b a t e</option>
+
+    <option disabled lang="ja">------- 日 本 語 -------</option>
+    <option value="以下のYouTube動画の文字起こしを要約してください。重要なポイントを3-5個のリストにまとめ、最後に200字程度の要約を作成してください。" lang="ja" style="font-weight: bold;">基 本</option>
+    <option value="内容を5つの重要なポイントにまとめ、それぞれに具体的な例を添えて説明してください。最後に300字程度の総括を作成してください。" lang="ja" style="font-weight: bold;">詳 細</option>
+    <option value="以下の内容について：
+1. 主要な論点（3点）
+2. 各論点の具体例
+3. 反論や課題
+4. 結論" lang="ja" style="font-weight: bold;">討 論</option>
+
+    <option disabled lang="zh">------- 中 文 -------</option>
+    <option value="请总结以下YouTube视频的转录内容。列出3-5个重点，并提供200字的总结。" lang="zh" style="font-weight: bold;">基 础</option>
+    <option value="请分析内容要点，列出5个关键点，并为每个点提供具体例子。最后提供300字的综合总结。" lang="zh" style="font-weight: bold;">详 细</option>
+    <option value="对于以下内容：
+1. 主要论点（3点）
+2. 各论点的具体例子
+3. 反驳意见
+4. 结论" lang="zh" style="font-weight: bold;">辩 论</option>
+</select>
+
+        <textarea id="promptTemplate" placeholder="ENTER YOUR PROMPT..."></textarea>
+        <button id="copyTranscript">COPY TEXT</button>
+    </div>
+    <div class="credit">©2025 info.HirokiTakamura</div>
+    <!-- シンプルなアラートメッセージ -->
+    <div class="retro-alert" id="customAlert">
+        <p id="alertMessage">COPY THAT!!</p>
+    </div>
+    <div class="loading-indicator"></div>
+    <script src="popup.js"></script>
+</body>
+</html>
