@@ -10,3 +10,5 @@ Thumbs.db
 # IDE specific files / IDE固
 
 .env
+# Development guide (ignored)
+DEVELOPMENT.md

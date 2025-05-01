@@ -10,11 +10,9 @@
         <h1 class="title">YoutubeMojiCopy</h1>
 
         <select id="templateSelect">
-            <option value="">テンプレート選択</option>
-            <option value="以下のYouTube動画の内容を要約してください。重要なポイントを3-5個リストアップし、200字程度の要約を作成してください。">基本要約</option>
-            <option value="以下の内容について分析してください：\n1. 主要なポイント（3-5点）\n2. 重要な例や引用\n3. 自分の意見や考察\n\n">詳細分析</option>
-            <option value="以下の内容を英語から日本語に翻訳し、その後要約してください：">翻訳＆要約</option>
+            <option value="">プロンプト選択</option>
         </select>
+        <button id="manageTemplates">プロンプト管理</button>
 
         <textarea id="promptTemplate" placeholder="プロンプトを入力してください..."></textarea>
         <button id="copyTranscript">テキストをコピー</button>
@@ -24,6 +22,6 @@
         <p id="alertMessage">コピーしました！</p>
     </div>
     <div class="loading-indicator"></div>
-    <script src="popup.js"></script>
+    <script type="module" src="popup.js"></script>
 </body>
 </html>

@@ -1,12 +1,37 @@
+import { loadPrompts } from './promptManager.js';
+
 document.addEventListener("DOMContentLoaded", () => {
-  const button = document.getElementById("copyTranscript");
-  const promptTemplate = document.getElementById("promptTemplate");
   const templateSelect = document.getElementById("templateSelect");
+  const manageButton = document.getElementById("manageTemplates");
+  const promptTemplate = document.getElementById("promptTemplate");
+  const button = document.getElementById("copyTranscript");
   const alertElement = document.getElementById("customAlert");
   const alertMessageElement = document.getElementById("alertMessage");
   const loadingIndicator = document.querySelector(".loading-indicator");
 
-  // テンプレート選択時の処理
+  // プロンプト管理ページへ
+  manageButton.addEventListener("click", () => {
+    chrome.runtime.openOptionsPage();
+  });
+
+  // プロンプトを読み込んでセレクトに追加
+  loadPrompts()
+    .then((prompts) => {
+      templateSelect.innerHTML = "";
+      const placeholder = document.createElement("option");
+      placeholder.value = "";
+      placeholder.textContent = "プロンプト選択";
+      templateSelect.appendChild(placeholder);
+      prompts.forEach((p) => {
+        const option = document.createElement("option");
+        option.value = p.text;
+        option.textContent = p.name;
+        templateSelect.appendChild(option);
+      });
+    })
+    .catch((err) => console.error("Failed to load prompts:", err));
+
+  // プロンプト選択時の処理
   templateSelect.addEventListener("change", () => {
     if (templateSelect.value === "") {
       promptTemplate.value = "";

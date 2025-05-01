@@ -17,5 +17,9 @@
     }
   },
   "permissions": ["activeTab", "scripting", "storage", "clipboardWrite"],
-  "host_permissions": ["https://www.youtube.com/*"]
+  "host_permissions": ["https://www.youtube.com/*"],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  }
 }

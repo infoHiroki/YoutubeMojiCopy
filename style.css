@@ -146,3 +146,29 @@ button:active {
     from { opacity: 1; }
     to { opacity: 0; }
 }
+
+/* Options page specific styling */
+body.options-page {
+    width: 600px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+body.options-page .container {
+    width: 100%;
+}
+
+/* spacing for prompt rows in options */
+.options-page .template-row {
+    margin-bottom: 16px;
+}
+
+/* options page buttons styling */
+.options-page button {
+    width: auto;
+    padding: 8px 12px;
+    margin: 8px 8px 8px 0;
+}
