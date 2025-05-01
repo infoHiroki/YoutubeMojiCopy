@@ -61,6 +61,9 @@ YouTube動画の字幕を簡単にコピーしてAIチャットに活用でき�
 ## ライセンス
 
 MIT License
+## お問い合わせ
+
+不具合報告・機能提案は <https://github.com/infoHiroki/YouTubeMojiCopy/issues> へお願いします。
 
 ## 開発者
 

@@ -7,8 +7,9 @@
 ehthumbs.db
 Thumbs.db
 
-# IDE specific files / IDE固
+# IDE specific files / IDE
 
 .env
 # Development guide (ignored)
 DEVELOPMENT.md
+build.sh
