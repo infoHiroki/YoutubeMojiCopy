@@ -1,339 +1,148 @@
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
 
-        body {
-            width: 320px;
-            padding: 20px;
-            background: #000;
-            color: #fff;
-            font-family: 'Courier New', monospace;
-            position: relative;
-            overflow: hidden;
-        }
+body {
+    width: 320px;
+    padding: 20px;
+    background: #f8f9fa;
+    color: #333;
+    font-family: 'Noto Sans JP', sans-serif;
+    margin: 0;
+}
 
-        .container {
-            background: #1a1a1a;
-            border: 3px solid #ff00ff;
-            border-radius: 0;
-            padding: 20px;
-            box-shadow:
-                0 0 10px #ff00ff,
-                inset 0 0 10px #ff00ff;
-            position: relative;
-            z-index: 1;
-        }
+.container {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
 
-        .title {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 14px;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #00ff00;
-            text-shadow:
-                2px 2px #000,
-                0 0 15px #00ff00;
-            letter-spacing: 1px;
-            position: relative;
-        }
+.title {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: 700;
+}
 
-        .title::before {
-            content: "TRANSCRIPT COPIER";
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #ff00ff;
-            z-index: -1;
-            filter: blur(4px);
-            opacity: 0.5;
-        }
+#templateSelect {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'Noto Sans JP', sans-serif;
+}
 
-        #templateSelect {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            background: #0a0a0a;
-            color: #00ff00;
-            border: 2px solid #00ff00;
-            font-size: 14px;
-            cursor: pointer;
-            text-align: center;
-        }
+#templateSelect:focus {
+    outline: none;
+    border-color: #ff0000;
+}
 
-        #templateSelect option {
-            background: #0a0a0a;
-            color: #00ff00;
-            padding: 8px;
-            text-align: center;
-        }
+textarea {
+    width: 100%;
+    height: 120px;
+    margin: 10px 0;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #333;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    resize: vertical;
+    box-sizing: border-box;
+}
 
-        #templateSelect option:disabled {
-            color: #005500;
-        }
+textarea:focus {
+    outline: none;
+    border-color: #ff0000;
+}
 
-        #templateSelect:focus {
-            outline: none;
-            box-shadow: 0 0 10px #00ff00;
-        }
+button {
+    width: 100%;
+    padding: 10px;
+    background: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
 
-        #templateSelect:hover {
-            background: #001100;
-        }
-        textarea {
-            width: 100%;
-            height: 120px;
-            margin: 10px 0;
-            padding: 12px;
-            background: #000;
-            border: 2px solid #00ffff;
-            color: #00ffff;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            resize: vertical;
-            box-sizing: border-box;
-            box-shadow: 0 0 5px #00ffff;
-            position: relative;
-            z-index: 1;
-        }
+button:hover {
+    background: #cc0000;
+}
 
-        textarea:focus {
-            outline: none;
-            border-color: #ff00ff;
-            box-shadow: 0 0 10px #ff00ff;
-        }
+button:active {
+    transform: scale(0.98);
+}
 
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #ff00ff;
-            color: #000;
-            border: none;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-           box-sizing: border-box;
-        }
+.credit {
+    text-align: center;
+    font-size: 10px;
+    margin-top: 15px;
+    color: #999;
+}
 
-        button::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.2),
-                transparent
-            );
-            transition: 0.5s;
-        }
+.alert {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ff0000;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+}
 
-        button:hover::after {
-            left: 100%;
-        }
+.alert.show {
+    display: block;
+    animation: fadeIn 0.3s, fadeOut 0.3s 1s forwards;
+}
 
-        button:active {
-            transform: scale(0.95);
-        }
+#alertMessage {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
 
-        .credit {
-            text-align: center;
-            font-size: 10px;
-            margin-top: 15px;
-            color: #00ff00;
-            font-family: 'Press Start 2P', cursive;
-            animation: blink 1.5s infinite;
-        }
+.loading-indicator {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #ff0000;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    z-index: 1002;
+}
 
-        /* カスタムアラート用のスタイル */
-        .retro-alert {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #000;
-            border: 2px solid #00ffff;
-            padding: 20px;
-            box-shadow: 0 0 20px #00ffff;
-            z-index: 1000;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
 
-        .retro-alert.show {
-            display: block;
-            animation: alertAppear 0.3s forwards, alertDisappear 0.3s 1s forwards;
-        }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
-        #alertMessage {
-            color: #00ffff;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 24px;
-            margin: 0;
-            padding: 15px;
-        }
-         .particle {
-          position: fixed;
-          pointer-events: none;
-          width: 6px;
-          height: 6px;
-          z-index: 1001;
-          border-radius: 50%;
-          box-shadow: 0 0 10px currentColor;
-        }
-
-        @keyframes particle {
-            0% {
-                transform: translate(var(--tx), var(--ty)) scale(1);
-                opacity: 1;
-             }
-            100% {
-               transform: translate(var(--tx), var(--ty)) scale(0);
-               opacity: 0;
-            }
-         }
-
-
-        @keyframes containerDisappear {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1.2);
-                opacity: 0;
-            }
-        }
-
-        @keyframes alertAppear {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes alertDisappear {
-            from { opacity: 1; }
-            to { opacity: 0; }
-        }
-
-        /* スキャンライン効果の改良 */
-        .scanline {
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0) 0%,
-                rgba(255, 255, 255, 0.1) 10%,
-                rgba(0, 0, 0, 0) 100%
-            );
-            position: fixed;
-            top: 0;
-            left: 0;
-            animation: scanline 8s linear infinite;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .noise {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE6d/iAAAACHRSTlMzMzMzMzMzM85JBgUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMjHxIGmVAAAAMElEQVQ4jWNgQAX8//8/AyMDKsnAwMgApqhA0cDAoADmg/kszFD+/4dQ/P8PophhAACpjQkMBRRz/AAAAABJRU5ErkJggg==');
-            opacity: 0.05;
-            z-index: 1;
-            pointer-events: none;
-        }
-        .loading-indicator {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border: 4px solid #ff00ff;
-            border-top: 4px solid transparent;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            z-index: 1002; /* アラートより上に表示 */
-        }
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        .selected-template{
-            box-shadow: 0 0 10px #ff00ff;
-            border-color: #ff00ff;
-        }
-
-                /* 日本語用ピクセルフォント */
-        @font-face {
-            font-family: 'PixelMplus12'; /* 例：Pixelmplusのフォント名 */
-            src: url('https://cdn.jsdelivr.net/npm/font-pixel-mplus@1.1.2/dist/PixelMplus12-Regular.woff2') format('woff2'), /* フォントファイルのパス */
-                url('https://cdn.jsdelivr.net/npm/font-pixel-mplus@1.1.2/dist/PixelMplus12-Regular.woff') format('woff'); /* 必要に応じてwoffも指定 */
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        /* 中国語用ピクセルフォント (例)*/
-        @font-face {
-            font-family: 'NotoSansSC'; /* 例：中国語用カスタムフォント */
-            src: url('https://fonts.gstatic.com/s/notosanssc/v18/file-notosanssc-NotoSansSC-Regular.woff2') format('woff2'),
-         url('https://fonts.gstatic.com/s/notosanssc/v18/file-notosanssc-NotoSansSC-Regular.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        /* 日本語テキストに適用 */
-        [lang="ja"] {
-            font-family: 'PixelMplus12', 'Courier New', monospace;
-        }
-
-        /* 中国語テキストに適用 */
-        [lang="zh"] {
-         font-family: 'NotoSansSC','Courier New', monospace;
-        }
-
-        /* メニュー項目に適用 */
-        select option{
-            font-family: 'PixelMplus12', 'Courier New', monospace;
-        }
-
-
-         @keyframes glitch-text {
-            0% {
-                transform: translate(0);
-               opacity: 1;
-               filter: none;
-            }
-
-            20% {
-                opacity: 0.9;
-               filter: brightness(0.8) contrast(1.2) hue-rotate(10deg);
-           }
-           40% {
-                opacity: 0.8;
-                filter: brightness(1.2) contrast(0.8)  hue-rotate(-10deg);
-           }
-             60% {
-                 opacity: 1;
-                 filter: brightness(1) contrast(1)  hue-rotate(0deg);
-             }
-            80% {
-                opacity: 0.9;
-                filter: brightness(0.9) contrast(1.1)  hue-rotate(5deg);
-
-           }
-            100% {
-                 transform: translate(0);
-                opacity: 1;
-                filter: none;
-           }
-        }
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}

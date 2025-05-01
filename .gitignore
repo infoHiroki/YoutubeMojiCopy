@@ -8,3 +8,5 @@ ehthumbs.db
 Thumbs.db
 
 # IDE specific files / IDE固
+
+.env

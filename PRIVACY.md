@@ -9,4 +9,4 @@ We do not:
 - Share any data with third parties
 - Use data for purposes other than the extension's functionality
 
-Contact: [Issues](https://github.com/infoHiroki/YouTubeTranscriptCopier/issues)
+Contact: [Issues](https://github.com/infoHiroki/YouTubeMojiCopy/issues)

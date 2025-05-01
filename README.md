@@ -1,59 +1,55 @@
+# YoutubeMojiCopy
 
-# YouTube Transcript Copier
+YouTube動画の字幕を簡単にコピーしてAIチャットに活用できるChrome拡張機能
 
-A Chrome extension that copies YouTube transcripts with AI analysis prompts.
-YouTubeの字幕をAI分析用プロンプト付きでコピーできるChrome拡張機能です。
-一个可以复制YouTube字幕并添加AI分析提示的Chrome扩展程序。
+## 特徴
 
-## Features / 機能 / 功能
-- Easy copying of YouTube transcripts
-- Prompt templates in English, Japanese and Chinese
-- Retro cyberpunk design
+- YouTube動画の字幕を簡単にコピー
+- 字幕取得から分析まで、ワンクリックで完結
+- 日本語に特化したプロンプトテンプレート
+- シンプルで使いやすいインターフェース
 
-- YouTubeの字幕を簡単にコピー
-- 日本語・英語・中国語のプロンプトテンプレート
-- レトロなサイバーパンクデザイン
+## インストール方法
 
-- 轻松复制YouTube字幕
-- 支持英语、日语和中文提示模板
-- 复古赛博朋克设计
+1. Chrome Web Storeから「YoutubeMojiCopy」をインストール
+2. YouTubeの動画ページを開く
+3. 拡張機能のアイコンをクリック
 
-## Installation / インストール方法 / 安装方法
-1. Install "YouTube Transcript Copier" from Chrome Web Store
-   Chrome Web Storeから「YouTube Transcript Copier」をインストール
-   从Chrome网上应用店安装"YouTube Transcript Copier"
+## 使い方
 
-2. Open a YouTube video page
-   YouTubeの動画ページを開く
-   打开YouTube视频页面
+1. YouTubeの動画ページを開く
+2. 拡張機能のアイコンをクリック
+3. プロンプトテンプレートを選択するか、独自のプロンプトを入力
+4. 「テキストをコピー」ボタンをクリック
+5. コピーされたテキストをChatGPT、Claude、Geminiなどのチャットサービスに貼り付け
 
-3. Click the extension icon
-   拡張機能のアイコンをクリック
-   点击扩展程序图标
+## プロンプトテンプレート
 
-4. Select a prompt template and copy
-   プロンプトテンプレートを選択してコピー
-   选择提示模板并复制
+拡張機能には以下の3つの基本テンプレートが用意されています：
 
-## Usage / 使い方 / 使用方法
-1. Play a YouTube video
-   YouTubeの動画を再生
-   播放YouTube视频
+1. **基本要約** - 動画内容の主要ポイントと要約を取得
+2. **詳細分析** - より深い分析と考察を得るためのテンプレート
+3. **翻訳＆要約** - 英語の字幕を日本語に翻訳し要約
 
-2. Click the extension icon
-   拡張機能のアイコンをクリック
-   点击扩展程序图标
+もちろん、独自のプロンプトを作成して保存することも可能です。
 
-3. Select or input template
-   テンプレートを選択または入力
-   选择或输入模板
+## 特長
 
-4. Click "COPY TEXT" button
-   「COPY TEXT」ボタンをクリック
-   点击"COPY TEXT"按钮
+- **シンプルな操作** - 余計な機能を省いた直感的な操作性
+- **マルチ言語対応** - 日本語・英語など、様々な言語の字幕に対応
+- **テンプレート保存** - よく使うプロンプトを自動保存
+- **軽量設計** - 最小限の機能でパフォーマンスを重視
 
-## License / ライセンス / 许可证
+## 注意事項
+
+- YouTubeの仕様変更により動作しなくなる可能性があります
+- 字幕が用意されていない動画では使用できません
+- 自動生成字幕の精度は元の音声によって異なります
+
+## ライセンス
+
 MIT License
 
-## Author / 作者 / 作者
+## 開発者
+
 info.HirokiTakamura

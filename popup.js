@@ -1,34 +1,20 @@
-// デバッグ用のログ出力を追加
-console.log("popup.js loaded");
-
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOM loaded");
   const button = document.getElementById("copyTranscript");
   const promptTemplate = document.getElementById("promptTemplate");
   const templateSelect = document.getElementById("templateSelect");
   const alertElement = document.getElementById("customAlert");
   const alertMessageElement = document.getElementById("alertMessage");
-  const container = document.querySelector(".container");
   const loadingIndicator = document.querySelector(".loading-indicator");
 
-  const title = document.querySelector(".title");
-  const select = document.querySelector("#templateSelect");
-  const textarea = document.querySelector("#promptTemplate");
-
-  // テンプレート選択時の処理を追加
+  // テンプレート選択時の処理
   templateSelect.addEventListener("change", () => {
     if (templateSelect.value === "") {
-      promptTemplate.value = ""; // Clear the textarea for Custom
+      promptTemplate.value = "";
       promptTemplate.focus();
     } else {
       promptTemplate.value = templateSelect.value;
       chrome.storage.local.set({ promptTemplate: templateSelect.value });
     }
-    // Add visual cue for the selected option
-    templateSelect.classList.add("selected-template");
-    setTimeout(() => {
-      templateSelect.classList.remove("selected-template");
-    }, 300);
   });
 
   // プロンプトをローカルストレージから読み込む
@@ -44,26 +30,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // アラート表示用の関数
-  function showCustomAlert(message, isSuccess = true) {
+  function showAlert(message, isSuccess = true) {
     alertMessageElement.textContent = message;
     alertElement.classList.add("show");
-    if (isSuccess) {
-      // グリッチエフェクトを適用
-      title.classList.add("glitch-text");
-      select.classList.add("glitch-text");
-      textarea.classList.add("glitch-text");
-      button.classList.add("glitch-text");
 
+    if (isSuccess) {
       setTimeout(() => {
-        title.classList.remove("glitch-text");
-        select.classList.remove("glitch-text");
-        textarea.classList.remove("glitch-text");
-        button.classList.remove("glitch-text");
         window.close();
-      }, 800);
-    }
-    // エラー時はアラートを自動で消去
-    if (!isSuccess) {
+      }, 1300);
+    } else {
       setTimeout(() => {
         alertElement.classList.remove("show");
       }, 1300);
@@ -71,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   button.addEventListener("click", async () => {
-    console.log("Button clicked");
     loadingIndicator.style.display = "block"; // ローディング開始
     try {
       const [tab] = await chrome.tabs.query({
@@ -79,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentWindow: true,
       });
       if (!tab) {
-        showCustomAlert("ERROR: No active tab", false);
+        showAlert("エラー: タブが見つかりません", false);
         return;
       }
 
@@ -87,22 +61,22 @@ document.addEventListener("DOMContentLoaded", () => {
         target: { tabId: tab.id },
         func: async () => {
           try {
-            console.log("スクリプト実行開始");
-
-            // 文字起こしボタンを探して自動クリック
+            // 複数言語の文字起こしボタンを探して自動クリック
             const transcriptButton =
               document.querySelector('button[aria-label="文字起こしを表示"]') ||
               document.querySelector('button[aria-label="字幕を表示"]') ||
-              document.querySelector('button[aria-label="Show transcript"]');
+              document.querySelector('button[aria-label="Show transcript"]') ||
+              document.querySelector(
+                'ytd-menu-service-item-renderer[role="menuitem"]'
+              );
 
             if (!transcriptButton) {
-              throw new Error("Transcript button not found");
+              throw new Error("文字起こしボタンが見つかりません");
             }
 
-            console.log("文字起こしボタン発見");
             transcriptButton.click();
 
-            // Wait for the transcript panel to open using an interval
+            // 文字起こしパネルが開くまで待機
             await new Promise((resolve, reject) => {
               const intervalId = setInterval(() => {
                 if (document.querySelector("ytd-transcript-segment-renderer")) {
@@ -111,10 +85,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
               }, 100);
 
-              // Timeout after 5 seconds
+              // 5秒後にタイムアウト
               setTimeout(() => {
                 clearInterval(intervalId);
-                reject(new Error("Timeout: Transcript panel did not open"));
+                reject(
+                  new Error("タイムアウト: 文字起こしパネルが開きませんでした")
+                );
               }, 5000);
             });
 
@@ -122,10 +98,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const segments = document.querySelectorAll(
               "ytd-transcript-segment-renderer"
             );
-            console.log("Found segments:", segments.length);
 
             if (segments.length === 0) {
-              throw new Error("No transcript found");
+              throw new Error("文字起こしが見つかりません");
             }
 
             let text = "";
@@ -143,31 +118,30 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (!text.trim()) {
-              throw new Error("Transcript content is empty");
+              throw new Error("文字起こしの内容が空です");
             }
 
             return text;
           } catch (error) {
-            console.error("Content script error:", error);
             throw error;
           }
         },
       });
 
       if (result && result[0] && result[0].result) {
-        const finalText = promptTemplate.value + result[0].result;
+        const finalText = promptTemplate.value + "\n\n" + result[0].result;
         await navigator.clipboard.writeText(finalText);
-        showCustomAlert("COPY THAT!!");
+        showAlert("コピーしました！");
       } else {
-        showCustomAlert("ERROR: Failed to retrieve transcript", false);
+        showAlert("エラー: 文字起こしの取得に失敗しました", false);
       }
     } catch (error) {
-      console.error("Error:", error);
-      showCustomAlert("ERROR: " + error.message, false);
+      showAlert("エラー: " + error.message, false);
     } finally {
       loadingIndicator.style.display = "none"; // ローディング終了
     }
   });
-  // Auto focus the textarea on load
+
+  // 起動時にテキストエリアにフォーカス
   promptTemplate.focus();
 });
