@@ -7,15 +7,17 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="title">YoutubeMojiCopy</h1>
+        <div class="header">
+            <h1 class="title">YoutubeMojiCopy</h1>
+            <button id="manageTemplates" class="btn-settings" title="プロンプト管理">⚙️</button>
+        </div>
 
         <select id="templateSelect">
             <option value="">プロンプト選択</option>
         </select>
-        <button id="manageTemplates">プロンプト管理</button>
 
         <textarea id="promptTemplate" placeholder="プロンプトを入力してください..."></textarea>
-        <button id="copyTranscript">テキストをコピー</button>
+        <button id="copyTranscript" class="btn-primary">コピー</button>
     </div>
     <div class="credit">©2025 info.HirokiTakamura</div>
     <div class="alert" id="customAlert">

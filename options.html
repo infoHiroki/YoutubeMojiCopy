@@ -7,11 +7,29 @@
 </head>
 <body class="options-page">
   <div class="container">
-    <h1 class="title">プロンプト管理</h1>
+    <div class="header">
+      <h1 class="title">プロンプト管理</h1>
+      <div class="header-buttons">
+        <button id="addTemplate" class="btn-add">＋新規プロンプト</button>
+        <button id="resetToDefault" class="btn-reset">↻ 初期化</button>
+        <button id="deleteAll" class="btn-delete-all">🗑️ すべて削除</button>
+      </div>
+    </div>
     <div id="templatesContainer"></div>
-    <button id="addTemplate">＋新規プロンプト</button>
-    <button id="saveTemplates">保存</button>
   </div>
+
+  <!-- カスタム確認ダイアログ -->
+  <div id="confirmDialog" class="dialog-overlay" style="display: none;">
+    <div class="dialog-box">
+      <h2 id="dialogTitle" class="dialog-title">確認</h2>
+      <p id="dialogMessage" class="dialog-message"></p>
+      <div class="dialog-buttons">
+        <button id="dialogCancel" class="dialog-btn dialog-btn-cancel">キャンセル</button>
+        <button id="dialogOk" class="dialog-btn dialog-btn-ok">OK</button>
+      </div>
+    </div>
+  </div>
+
   <script type="module" src="options.js"></script>
 </body>
 </html>

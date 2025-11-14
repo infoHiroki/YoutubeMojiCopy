@@ -10,9 +10,11 @@ export async function loadPrompts() {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get([STORAGE_KEY], (result) => {
       const prompts = result.customPrompts;
-      if (Array.isArray(prompts) && prompts.length > 0) {
+      // 保存されたプロンプトがある場合は、空の配列でもそれを使用
+      if (Array.isArray(prompts)) {
         resolve(prompts);
       } else {
+        // 初回起動時のみデフォルトプロンプトを読み込む
         const url = chrome.runtime.getURL('defaultPrompts.json');
         fetch(url)
           .then((response) => {

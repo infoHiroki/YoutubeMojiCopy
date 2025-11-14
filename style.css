@@ -17,12 +17,35 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .title {
     font-size: 18px;
     text-align: center;
     margin-bottom: 20px;
     color: #333;
     font-weight: 700;
+}
+
+/* Popup title */
+.header .title {
+    margin: 0;
+    text-align: center;
+    font-size: 22px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Options page title styling */
+.options-page .header .title {
+    text-align: left;
+    font-size: 26px;
+    color: #222;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #templateSelect {
@@ -39,7 +62,7 @@ body {
 
 #templateSelect:focus {
     outline: none;
-    border-color: #ff0000;
+    border-color: #E73E8F;
 }
 
 textarea {
@@ -59,13 +82,19 @@ textarea {
 
 textarea:focus {
     outline: none;
-    border-color: #ff0000;
+    border-color: #E73E8F;
+}
+
+/* フリー入力モード時のスタイル */
+textarea.free-input-mode {
+    border-color: #E73E8F;
+    border-width: 2px;
 }
 
 button {
     width: 100%;
     padding: 10px;
-    background: #ff0000;
+    background: #E73E8F;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -77,11 +106,41 @@ button {
 }
 
 button:hover {
-    background: #cc0000;
+    background: #C73277;
 }
 
 button:active {
     transform: scale(0.98);
+}
+
+/* メインアクションボタン（テキストをコピー） */
+.btn-primary {
+    background: #E73E8F;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #C73277;
+}
+
+/* 設定ボタン（タイトル横） */
+.btn-settings {
+    width: auto;
+    padding: 8px;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-settings:hover {
+    transform: rotate(360deg);
+    background: transparent;
 }
 
 .credit {
@@ -97,7 +156,7 @@ button:active {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #ff0000;
+    background: #E73E8F;
     color: #fff;
     padding: 15px 20px;
     border-radius: 4px;
@@ -124,7 +183,7 @@ button:active {
     left: 50%;
     transform: translate(-50%, -50%);
     border: 3px solid #f3f3f3;
-    border-top: 3px solid #ff0000;
+    border-top: 3px solid #E73E8F;
     border-radius: 50%;
     width: 24px;
     height: 24px;
@@ -149,26 +208,199 @@ button:active {
 
 /* Options page specific styling */
 body.options-page {
-    width: 600px;
+    width: 900px;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
+    padding: 40px 20px;
 }
 
 body.options-page .container {
     width: 100%;
 }
 
-/* spacing for prompt rows in options */
-.options-page .template-row {
-    margin-bottom: 16px;
+/* Header buttons for options page */
+.options-page .header-buttons {
+    display: flex;
+    gap: 10px;
 }
 
-/* options page buttons styling */
-.options-page button {
+.options-page .header-buttons button {
     width: auto;
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+/* Grid layout for prompt cards */
+#templatesContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Card styling for each prompt */
+.template-row {
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.2s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.template-row:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #E73E8F;
+}
+
+.template-row input.template-name {
+    width: 100%;
     padding: 8px 12px;
-    margin: 8px 8px 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.template-row textarea.template-text {
+    width: 100%;
+    min-height: 100px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'Noto Sans JP', sans-serif;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.template-row input:focus,
+.template-row textarea:focus {
+    outline: none;
+    border-color: #E73E8F;
+}
+
+.template-row button {
+    align-self: flex-end;
+    width: auto;
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+/* Button colors for options page */
+.btn-add {
+    background: #6c757d;
+    color: #fff;
+}
+
+.btn-add:hover {
+    background: #5a6268;
+}
+
+.btn-reset {
+    background: #007bff;
+    color: #fff;
+}
+
+.btn-reset:hover {
+    background: #0056b3;
+}
+
+.btn-delete-all {
+    background: #dc3545;
+    color: #fff;
+}
+
+.btn-delete-all:hover {
+    background: #c82333;
+}
+
+.deleteTemplate {
+    background: #dc3545;
+    color: #fff;
+}
+
+.deleteTemplate:hover {
+    background: #c82333;
+}
+
+/* カスタム確認ダイアログ */
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.dialog-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dialog-title {
+    margin: 0 0 16px 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #222;
+}
+
+.dialog-message {
+    margin: 0 0 24px 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+    white-space: pre-line;
+}
+
+.dialog-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.dialog-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.dialog-btn-cancel {
+    background: #6c757d;
+    color: #fff;
+}
+
+.dialog-btn-cancel:hover {
+    background: #5a6268;
+}
+
+.dialog-btn-ok {
+    background: #E73E8F;
+    color: #fff;
+}
+
+.dialog-btn-ok:hover {
+    background: #C73277;
 }
