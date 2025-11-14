@@ -12,4 +12,6 @@ Thumbs.db
 .env
 # Development guide (ignored)
 DEVELOPMENT.md
-build.sh
+
+# Build artifacts / ビルド成果物
+# *.zip  # 配布用zipは手動でコミットするため、コメントアウト
