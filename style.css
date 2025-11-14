@@ -150,6 +150,17 @@ button:active {
     color: #999;
 }
 
+.credit a {
+    color: #999;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.credit a:hover {
+    color: #E73E8F;
+    text-decoration: underline;
+}
+
 .alert {
     display: none;
     position: fixed;
