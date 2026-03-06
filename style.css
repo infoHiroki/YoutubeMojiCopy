@@ -2,7 +2,6 @@
 
 /* 移行バナー */
 .migration-banner {
-    width: 320px;
     background: linear-gradient(135deg, #667eea 0%, #E73E8F 100%);
     color: #fff;
     border-radius: 8px;
@@ -10,6 +9,7 @@
     margin-bottom: 12px;
     text-align: center;
     font-family: 'Noto Sans JP', sans-serif;
+    box-sizing: border-box;
 }
 
 .migration-banner.hidden {
