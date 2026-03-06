@@ -1,69 +1,42 @@
 # YoutubeMojiCopy
 
-YouTube動画の字幕を簡単にコピーしてAIチャットに活用できるChrome拡張機能
+> **This project has been merged into [YouTube Transcript Copier](https://github.com/infoHiroki/YouTubeTranscriptCopier).** Please use the new extension going forward.
 
-## 特徴
+## 統合のお知らせ
 
-- YouTube動画の字幕を簡単にコピー
-- 字幕取得からコピーまで、ワンクリックで完結
-- 日本語に特化したプロンプトテンプレート
-- シンプルで使いやすいインターフェース
+YoutubeMojiCopyは **[YouTube Transcript Copier](https://github.com/infoHiroki/YouTubeTranscriptCopier)** に統合されました。
 
-## インストール方法
+新しい拡張機能では、YoutubeMojiCopyの全機能に加えて以下が利用できます：
 
-1. Chrome Web Storeから「YoutubeMojiCopy」をインストール
-2. YouTubeの動画ページを開く
-3. 拡張機能のアイコンをクリック
+- 日本語 / 英語 UI切替
+- Clean Modern / Cyberpunk テーマ切替
+- 2026年YouTube UI変更への対応（4段階フォールバック字幕取得）
+- 自由編集モード
 
-## スクリーンショット
+### 移行方法
 
-以下は拡張機能のサンプル画面です。
+1. [Chrome Web Store](https://chromewebstore.google.com/detail/youtube-transcript-copier/pjogfgkppdcjmgehjfecjdjfhpjapiph) から YouTube Transcript Copier をインストール
+2. YoutubeMojiCopyをアンインストール（カスタムプロンプトは新拡張で再設定してください）
 
-![ポップアップ画面](docs/screenshot01.png)
+---
 
-*動画ページ上でアイコンをクリックすると表示されるポップアップです。*
+## アーカイブ情報
 
-![プロンプト管理画面](docs/screenshot02.png)
+以下はv1.2（最終版）時点の情報です。
 
-*オプションページでプロンプトを追加・編集・削除できます。*
+### 概要
 
-## 使い方
+YouTube動画の字幕を簡単にコピーしてAIチャットに活用できるChrome拡張機能。
 
-1. YouTubeの動画ページを開く
-2. 拡張機能のアイコンをクリック
-3. プロンプトテンプレートを選択するか、独自のプロンプトを入力
-4. 「テキストをコピー」ボタンをクリック
-5. コピーされたテキストをChatGPT、Claude、Geminiなどのチャットサービスに貼り付け
+### バージョン履歴
 
-## プロンプトテンプレート
-
-拡張機能には以下の3つの基本テンプレートが用意されています：
-
-1. **基本要約** - 動画内容の主要ポイントと要約を取得
-2. **詳細分析** - より深い分析と考察を得るためのテンプレート
-3. **翻訳＆要約** - 英語の字幕を日本語に翻訳し要約
-
-もちろん、独自のプロンプトを作成して保存することも可能です。
-
-## 特長
-
-- **シンプルな操作** - 余計な機能を省いた直感的な操作性
-- **マルチ言語対応** - 日本語・英語など、様々な言語の字幕に対応
-- **テンプレート保存** - よく使うプロンプトを自動保存
-- **軽量設計** - 最小限の機能でパフォーマンスを重視
-
-## 注意事項
-
-- YouTubeの仕様変更により動作しなくなる可能性があります
-- 字幕が用意されていない動画では使用できません
-- 自動生成字幕の精度は元の音声によって異なります
+- **v1.2** - 最終版。YouTube Transcript Copierへの移行バナーを追加
+- **v1.1** - 自由編集モード、プロンプト管理UI改善
+- **v1.0** - 初回リリース
 
 ## ライセンス
 
 MIT License
-## お問い合わせ
-
-不具合報告・機能提案は <https://github.com/infoHiroki/YouTubeMojiCopy/issues> へお願いします。
 
 ## 開発者
 

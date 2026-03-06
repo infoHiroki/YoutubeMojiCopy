@@ -1,5 +1,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
 
+/* 移行バナー */
+.migration-banner {
+    width: 320px;
+    background: linear-gradient(135deg, #667eea 0%, #E73E8F 100%);
+    color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 12px;
+    text-align: center;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.migration-banner.hidden {
+    display: none;
+}
+
+.migration-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.migration-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+}
+
+.migration-text {
+    font-size: 12px;
+    line-height: 1.6;
+    margin: 0 0 14px 0;
+    opacity: 0.95;
+}
+
+.migration-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #fff;
+    color: #E73E8F;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Noto Sans JP', sans-serif;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-sizing: border-box;
+}
+
+.migration-btn:hover {
+    background: #f0f0f0;
+    transform: scale(1.02);
+}
+
+.migration-dismiss {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 6px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    border: none;
+    font-size: 11px;
+    font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.migration-dismiss:hover {
+    color: #fff;
+    background: transparent;
+}
+
 body {
     width: 320px;
     padding: 20px;

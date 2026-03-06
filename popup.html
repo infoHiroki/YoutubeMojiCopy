@@ -6,10 +6,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 移行バナー -->
+    <div class="migration-banner">
+        <div class="migration-icon">&#x1F4E2;</div>
+        <p class="migration-title">統合のお知らせ</p>
+        <p class="migration-text">YoutubeMojiCopyは<strong>YouTube Transcript Copier</strong>に統合されました。日本語UI・テーマ切替・最新YouTube対応など、全機能がご利用いただけます。</p>
+        <a id="migrationLink" href="https://chromewebstore.google.com/detail/youtube-transcript-copier/pjogfgkppdcjmgehjfecjdjfhpjapiph" target="_blank" class="migration-btn">新しい拡張機能をインストール</a>
+        <button id="dismissBanner" class="migration-dismiss">このまま使い続ける</button>
+    </div>
+
     <div class="container">
         <div class="header">
             <h1 class="title">YoutubeMojiCopy</h1>
-            <button id="manageTemplates" class="btn-settings" title="プロンプト管理">⚙️</button>
+            <button id="manageTemplates" class="btn-settings" title="プロンプト管理">&#x2699;&#xFE0F;</button>
         </div>
 
         <select id="templateSelect">

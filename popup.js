@@ -9,6 +9,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const alertMessageElement = document.getElementById("alertMessage");
   const loadingIndicator = document.querySelector(".loading-indicator");
 
+  // 移行バナーの表示制御
+  const banner = document.querySelector(".migration-banner");
+  const dismissBtn = document.getElementById("dismissBanner");
+  chrome.storage.local.get(["migrationDismissed"], (result) => {
+    if (result.migrationDismissed) {
+      banner.classList.add("hidden");
+    }
+  });
+  dismissBtn.addEventListener("click", () => {
+    banner.classList.add("hidden");
+    chrome.storage.local.set({ migrationDismissed: true });
+  });
+
   // プロンプト管理ページへ
   manageButton.addEventListener("click", () => {
     chrome.runtime.openOptionsPage();
@@ -146,25 +159,40 @@ document.addEventListener("DOMContentLoaded", () => {
         target: { tabId: tab.id },
         func: async () => {
           try {
-            // 複数言語の文字起こしボタンを探して自動クリック
-            const transcriptButton =
-              document.querySelector('button[aria-label="文字起こしを表示"]') ||
-              document.querySelector('button[aria-label="字幕を表示"]') ||
-              document.querySelector('button[aria-label="Show transcript"]') ||
-              document.querySelector(
-                'ytd-menu-service-item-renderer[role="menuitem"]'
-              );
+            // 既に文字起こしパネルが開いているか確認
+            const existingPanel = document.querySelector(
+              'ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-searchable-transcript"]'
+            );
+            const panelAlreadyOpen = existingPanel &&
+              existingPanel.getAttribute('visibility') === 'ENGAGEMENT_PANEL_VISIBILITY_EXPANDED';
 
-            if (!transcriptButton) {
-              throw new Error("文字起こしボタンが見つかりません");
+            if (!panelAlreadyOpen) {
+              // 複数のセレクタで文字起こしボタンを探して自動クリック
+              const transcriptButton =
+                document.querySelector('ytd-video-description-transcript-section-renderer button') ||
+                document.querySelector('button[aria-label="文字起こしを表示"]') ||
+                document.querySelector('button[aria-label="字幕を表示"]') ||
+                document.querySelector('button[aria-label="Show transcript"]') ||
+                document.querySelector('button[aria-label*="transcript" i]') ||
+                document.querySelector(
+                  'ytd-menu-service-item-renderer[role="menuitem"]'
+                );
+
+              if (!transcriptButton) {
+                throw new Error("文字起こしボタンが見つかりません");
+              }
+
+              transcriptButton.click();
             }
 
-            transcriptButton.click();
-
-            // 文字起こしパネルが開くまで待機
+            // 文字起こしパネルが開くまで待機（新旧両方のセレクタに対応）
             await new Promise((resolve, reject) => {
               const intervalId = setInterval(() => {
-                if (document.querySelector("ytd-transcript-segment-renderer")) {
+                if (
+                  document.querySelector("ytd-transcript-segment-renderer") ||
+                  document.querySelector("#segments-container") ||
+                  document.querySelector('ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-searchable-transcript"] .segment-text')
+                ) {
                   clearInterval(intervalId);
                   resolve();
                 }
@@ -179,31 +207,60 @@ document.addEventListener("DOMContentLoaded", () => {
               }, 5000);
             });
 
-            // 文字起こしセグメントの取得
-            const segments = document.querySelectorAll(
+            // 文字起こしセグメントの取得（複数の方法を試行）
+            let text = "";
+
+            // 方法1: ytd-transcript-segment-renderer（従来の方法）
+            const oldSegments = document.querySelectorAll(
               "ytd-transcript-segment-renderer"
             );
-
-            if (segments.length === 0) {
-              throw new Error("文字起こしが見つかりません");
+            if (oldSegments.length > 0) {
+              oldSegments.forEach((segment) => {
+                const timestamp =
+                  segment
+                    .querySelector(".segment-timestamp")
+                    ?.textContent?.trim() || "";
+                const content =
+                  segment.querySelector(".segment-text")?.textContent?.trim() ||
+                  "";
+                if (timestamp && content) {
+                  text += `${timestamp} ${content}\n`;
+                }
+              });
             }
 
-            let text = "";
-            segments.forEach((segment) => {
-              const timestamp =
-                segment
-                  .querySelector(".segment-timestamp")
-                  ?.textContent?.trim() || "";
-              const content =
-                segment.querySelector(".segment-text")?.textContent?.trim() ||
-                "";
-              if (timestamp && content) {
-                text += `${timestamp} ${content}\n`;
+            // 方法2: engagement panel から .segment-text を取得
+            if (!text.trim()) {
+              const panel = document.querySelector(
+                'ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-searchable-transcript"]'
+              );
+              if (panel) {
+                const segments = panel.querySelectorAll('.segment-text');
+                segments.forEach((seg) => {
+                  const content = seg.textContent?.trim();
+                  if (content) {
+                    text += `${content}\n`;
+                  }
+                });
               }
-            });
+            }
+
+            // 方法3: #segments-container 内の yt-formatted-string を取得
+            if (!text.trim()) {
+              const container = document.querySelector('#segments-container');
+              if (container) {
+                const segments = container.querySelectorAll('yt-formatted-string');
+                segments.forEach((segment) => {
+                  const content = segment.textContent?.trim();
+                  if (content) {
+                    text += `${content}\n`;
+                  }
+                });
+              }
+            }
 
             if (!text.trim()) {
-              throw new Error("文字起こしの内容が空です");
+              throw new Error("文字起こしが見つかりません");
             }
 
             return text;
